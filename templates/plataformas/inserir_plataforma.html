@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Nova Plataforma — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+        <div class="card">
+            <div class="card-header-game py-3 px-4">
+                <h5 class="mb-0 fw-bold">🖥️ Cadastrar Nova Plataforma</h5>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('inserir_plataforma') }}" method="post">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome da plataforma</label>
+                        <input type="text" class="form-control" id="nome" name="nome"
+                               placeholder="Ex: PlayStation 5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fabricante" class="form-label">Fabricante</label>
+                        <input type="text" class="form-control" id="fabricante" name="fabricante"
+                               placeholder="Ex: Sony, Nintendo, Microsoft" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="tipo" class="form-label">Tipo</label>
+                            <select class="form-select" id="tipo" name="tipo" required>
+                                <option value="" disabled selected>Selecione...</option>
+                                <option value="Console">Console</option>
+                                <option value="Híbrido">Híbrido</option>
+                                <option value="Computador">Computador</option>
+                                <option value="Portátil">Portátil</option>
+                                <option value="Mobile">Mobile</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="ano_lancamento" class="form-label">Ano de lançamento</label>
+                            <input type="number" class="form-control" id="ano_lancamento" name="ano_lancamento"
+                                   placeholder="Ex: 2020" min="1970" max="2030" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="jogos_disponiveis" class="form-label">Nº de jogos disponíveis (aprox.)</label>
+                        <input type="number" class="form-control" id="jogos_disponiveis" name="jogos_disponiveis"
+                               placeholder="Ex: 500" min="0">
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-game">💾 Salvar</button>
+                        <a href="{{ url_for('listar_plataformas') }}" class="btn btn-outline-secondary">✖ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
