@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Plataformas — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="page-title mb-0">🖥️ Plataformas</h2>
+    <a href="{{ url_for('inserir_plataforma') }}" class="btn btn-game">+ Nova Plataforma</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-game">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Fabricante</th>
+                <th>Tipo</th>
+                <th class="text-center">Lançamento</th>
+                <th class="text-center">Jogos</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in plataformas %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td class="fw-semibold">{{ p.nome }}</td>
+                <td>{{ p.fabricante }}</td>
+                <td><span class="badge badge-tipo">{{ p.tipo }}</span></td>
+                <td class="text-center">{{ p.ano_lancamento }}</td>
+                <td class="text-center">{{ p.jogos_disponiveis }}+</td>
+                <td class="text-center">
+                    <a href="{{ url_for('editar_plataforma', pid=p.id) }}" class="btn btn-sm btn-outline-warning">✏️ Editar</a>
+                    <form action="{{ url_for('excluir_plataforma', pid=p.id) }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger btn-excluir">🗑️ Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<p class="text-muted small">Total: {{ plataformas|length }} plataforma(s) cadastrada(s).</p>
+{% endblock %}
