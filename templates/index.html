@@ -1,0 +1,75 @@
+{% extends 'base_publica.html' %}
+
+{% block titulo %}GameStore — Sua Coleção de Games{% endblock %}
+
+{% block conteudo %}
+
+<!-- Hero -->
+<div class="hero-section text-center py-5 mb-5">
+    <div class="hero-glow"></div>
+    <h1 class="hero-title display-3 fw-bold mb-3">🎮 GameStore</h1>
+    <p class="hero-subtitle fs-4 mb-4">
+        Gerencie sua coleção de jogos e plataformas com estilo.<br>
+        Organize, explore e compartilhe suas conquistas.
+    </p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="{{ url_for('login') }}" class="btn btn-game btn-lg px-4">Acessar Sistema</a>
+        <a href="{{ url_for('cadastro') }}" class="btn btn-outline-game btn-lg px-4">Criar Conta</a>
+    </div>
+</div>
+
+<!-- Funcionalidades -->
+<h2 class="text-center mb-4 section-title">O que você pode fazer</h2>
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card feature-card h-100 text-center p-4">
+            <div class="feature-icon mb-3">🎮</div>
+            <h5 class="fw-bold">Catálogo de Jogos</h5>
+            <p class="text-muted">Registre todos os seus jogos com gênero, plataforma, ano de lançamento e nota pessoal.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card feature-card h-100 text-center p-4">
+            <div class="feature-icon mb-3">🖥️</div>
+            <h5 class="fw-bold">Gerenciar Plataformas</h5>
+            <p class="text-muted">Cadastre consoles e plataformas da sua coleção: PlayStation, Xbox, Nintendo e muito mais.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card feature-card h-100 text-center p-4">
+            <div class="feature-icon mb-3">👤</div>
+            <h5 class="fw-bold">Controle de Usuários</h5>
+            <p class="text-muted">Gerencie quem tem acesso ao sistema, com diferentes perfis de acesso e permissões.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Gêneros em destaque -->
+<h2 class="text-center mb-4 section-title">Gêneros em Destaque</h2>
+<div class="row g-3 mb-5">
+    {% set generos = [
+        ('⚔️', 'RPG', 'Aventuras épicas e mundos abertos'),
+        ('🔫', 'FPS', 'Ação em primeira pessoa'),
+        ('🗺️', 'Aventura', 'Exploração e narrativa imersiva'),
+        ('🏆', 'Esportes', 'Competição e habilidade'),
+        ('🧩', 'Puzzle', 'Desafios para a mente'),
+        ('👾', 'Indie', 'Arte e criatividade independente'),
+    ] %}
+    {% for emoji, nome, desc in generos %}
+    <div class="col-6 col-md-4 col-lg-2">
+        <div class="card genero-card text-center p-3 h-100">
+            <div class="fs-2 mb-1">{{ emoji }}</div>
+            <div class="fw-bold small">{{ nome }}</div>
+            <div class="text-muted" style="font-size: 0.72rem;">{{ desc }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- CTA final -->
+<div class="text-center py-4">
+    <h4 class="mb-3">Pronto para organizar sua coleção?</h4>
+    <a href="{{ url_for('cadastro') }}" class="btn btn-game btn-lg">Começar agora →</a>
+</div>
+
+{% endblock %}

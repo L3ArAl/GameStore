@@ -1,0 +1,80 @@
+{% extends 'base_publica.html' %}
+
+{% block titulo %}Cadastro — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card auth-card">
+            <div class="card-header-game text-center py-3">
+                <h4 class="mb-0 fw-bold">👾 Criar Conta</h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('cadastro') }}" method="post">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome completo</label>
+                        <input type="text" class="form-control" id="nome" name="nome"
+                               placeholder="Seu nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               placeholder="seu@email.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="senha" name="senha"
+                               placeholder="Mínimo 6 caracteres" required minlength="6"
+                               oninput="verificarForca(this.value)">
+                        <div id="forca-barra" class="mt-2" style="display:none;">
+                            <div class="progress" style="height:6px;">
+                                <div id="forca-progresso" class="progress-bar" role="progressbar"></div>
+                            </div>
+                            <small id="forca-texto" class="text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="confirmar" class="form-label">Confirmar senha</label>
+                        <input type="password" class="form-control" id="confirmar" name="confirmar"
+                               placeholder="Repita a senha" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn btn-game w-100 mb-3">Criar conta →</button>
+                    <p class="text-center text-muted small mb-0">
+                        Já tem conta? <a href="{{ url_for('login') }}" class="link-game">Faça login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function verificarForca(senha) {
+    const barra = document.getElementById('forca-barra');
+    const progresso = document.getElementById('forca-progresso');
+    const texto = document.getElementById('forca-texto');
+    barra.style.display = senha.length > 0 ? 'block' : 'none';
+
+    let forca = 0;
+    if (senha.length >= 6) forca++;
+    if (senha.length >= 10) forca++;
+    if (/[A-Z]/.test(senha)) forca++;
+    if (/[0-9]/.test(senha)) forca++;
+    if (/[^a-zA-Z0-9]/.test(senha)) forca++;
+
+    const niveis = [
+        { pct: 20, cor: 'bg-danger', label: 'Muito fraca' },
+        { pct: 40, cor: 'bg-warning', label: 'Fraca' },
+        { pct: 60, cor: 'bg-info', label: 'Média' },
+        { pct: 80, cor: 'bg-primary', label: 'Forte' },
+        { pct: 100, cor: 'bg-success', label: 'Muito forte' },
+    ];
+    const nivel = niveis[Math.min(forca, 4)];
+    progresso.style.width = nivel.pct + '%';
+    progresso.className = 'progress-bar ' + nivel.cor;
+    texto.textContent = 'Força da senha: ' + nivel.label;
+}
+</script>
+{% endblock %}
