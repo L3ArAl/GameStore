@@ -1,0 +1,223 @@
+/* ===================================================
+   GameStore — styles.css
+   Identidade visual: dark gaming com neon verde/roxo
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap');
+
+:root {
+    --verde-neon:   #00ff88;
+    --roxo-game:    #7c3aed;
+    --roxo-escuro:  #4c1d95;
+    --roxo-claro:   #a78bfa;
+    --bg-dark:      #0f0f1a;
+    --bg-card:      #1a1a2e;
+    --texto-muted: #cfd3ff;
+}
+
+/* ───────── BODY ───────── */
+body {
+    background-color: #f4f3ff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+}
+body.publica-bg {
+    background: linear-gradient(160deg, #0f0f1a 0%, #1e0b3a 60%, #0f0f1a 100%);
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+/* ───────── TIPOGRAFIA ───────── */
+.brand-text {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--verde-neon);
+    text-shadow: 0 0 10px rgba(0,255,136,0.5);
+    letter-spacing: 1px;
+}
+.page-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--roxo-escuro);
+    font-size: 1.6rem;
+}
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--verde-neon);
+    font-size: 1.4rem;
+    text-shadow: 0 0 12px rgba(0,255,136,0.3);
+}
+
+/* ───────── NAVBAR ───────── */
+.navbar-game {
+    background: linear-gradient(90deg, #0f0f1a 0%, #1a0533 100%) !important;
+    border-bottom: 2px solid var(--roxo-game);
+    box-shadow: 0 2px 20px rgba(124,58,237,0.3);
+    padding: 0.7rem 0;
+}
+.navbar-publica {
+    background: rgba(15,15,26,0.85) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(124,58,237,0.4);
+}
+.navbar-brand, .nav-link {
+    color: #e0e0e0 !important;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.nav-link:hover {
+    color: var(--verde-neon) !important;
+}
+
+/* ───────── BOTÕES ───────── */
+.btn-game {
+    background: linear-gradient(135deg, var(--roxo-game), var(--roxo-escuro));
+    color: #fff !important;
+    border: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+.btn-game:hover {
+    background: linear-gradient(135deg, #6d28d9, #3b0764);
+    box-shadow: 0 4px 15px rgba(124,58,237,0.4);
+    transform: translateY(-1px);
+}
+.btn-outline-game {
+    border: 2px solid var(--verde-neon);
+    color: var(--verde-neon) !important;
+    background: transparent;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.btn-outline-game:hover {
+    background: var(--verde-neon);
+    color: #0f0f1a !important;
+}
+.link-game {
+    color: var(--roxo-claro);
+    text-decoration: none;
+}
+.link-game:hover {
+    color: var(--verde-neon);
+}
+
+/* ───────── CARDS ───────── */
+.card {
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(124,58,237,0.15);
+}
+.card-header-game {
+    background: linear-gradient(135deg, var(--roxo-game), var(--roxo-escuro));
+    color: #fff;
+}
+.auth-card {
+    background: rgba(26,26,46,0.95);
+    border: 1px solid rgba(124,58,237,0.4);
+    color: #e0e0e0;
+}
+.auth-card .form-label { color: #c4b5fd; }
+.auth-card .form-control {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(124,58,237,0.4);
+    color: #e0e0e0;
+}
+.auth-card .form-control::placeholder { color: #666; }
+.auth-card .form-control:focus {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--verde-neon);
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(0,255,136,0.15);
+}
+.feature-card {
+    background: rgba(26,26,46,0.8);
+    border-color: rgba(124,58,237,0.3);
+    color: #e0e0e0;
+}
+.feature-icon { font-size: 2.5rem; }
+.genero-card {
+    background: rgba(26,26,46,0.7);
+    border-color: rgba(124,58,237,0.25);
+    color: #ffffff;
+}
+
+/* ───────── HERO ───────── */
+.hero-section { position: relative; }
+.hero-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--verde-neon);
+    text-shadow: 0 0 30px rgba(0,255,136,0.5);
+}
+.hero-subtitle { color: #e0e0ff; }
+
+/* ───────── TABELAS ───────── */
+.table-game {
+    background: linear-gradient(90deg, var(--roxo-game), var(--roxo-escuro));
+    color: #fff;
+}
+.table-game th { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.5px; }
+.table { border-radius: 8px; overflow: hidden; }
+.table tbody tr:hover { background-color: rgba(124,58,237,0.06); }
+
+/* ───────── BADGES ───────── */
+.badge-perfil { background: var(--roxo-game); color: #fff; border-radius: 20px; padding: 0.35em 0.8em; font-size: 0.8rem; }
+.badge-genero { background: #1e40af; color: #fff; border-radius: 20px; padding: 0.35em 0.8em; font-size: 0.8rem; }
+.badge-tipo   { background: #065f46; color: #fff; border-radius: 20px; padding: 0.35em 0.8em; font-size: 0.8rem; }
+.nota-badge { font-weight: 700; font-size: 0.9rem; color: var(--roxo-escuro); }
+.nota-10 { color: #15803d; }
+.nota-9  { color: #1d4ed8; }
+.nota-8  { color: #b45309; }
+
+/* ───────── FLASH MESSAGES ───────── */
+.alert {
+    border-radius: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+}
+
+/* ───────── FOOTER ───────── */
+.footer-site {
+    background: linear-gradient(90deg, #0f0f1a, #1a0533);
+    color: var(--texto-muted);
+    padding: 1.5rem 0;
+    margin-top: 4rem;
+    font-size: 0.875rem;
+    border-top: 1px solid rgba(124,58,237,0.3);
+}
+
+.feature-card p {
+    color: #e8e8ff !important;
+}
+
+.genero-card p {
+    color: #e8e8ff !important;
+}
+
+.feature-card h5,
+.genero-card h6 {
+    color: #ffffff;
+}
+
+.genero-card {
+    color: #f5f5ff !important;
+}
+
+.genero-card h6 {
+    color: #ffffff !important;
+}
+
+.genero-card p,
+.genero-card small,
+.genero-card .text-muted {
+    color: #dcdcff !important;
+    opacity: 1 !important;
+}
