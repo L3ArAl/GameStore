@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Novo Jogo — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card">
+            <div class="card-header-game py-3 px-4">
+                <h5 class="mb-0 fw-bold">🎮 Adicionar Jogo à Coleção</h5>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('inserir_jogo') }}" method="post">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título do jogo</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo"
+                               placeholder="Ex: The Legend of Zelda" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="genero" class="form-label">Gênero</label>
+                            <select class="form-select" id="genero" name="genero" required>
+                                <option value="" disabled selected>Selecione...</option>
+                                <option>RPG</option>
+                                <option>Aventura</option>
+                                <option>FPS</option>
+                                <option>Ação</option>
+                                <option>Metroidvania</option>
+                                <option>Esportes</option>
+                                <option>Puzzle</option>
+                                <option>Estratégia</option>
+                                <option>Indie</option>
+                                <option>Plataforma</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="plataforma" class="form-label">Plataforma</label>
+                            <select class="form-select" id="plataforma" name="plataforma" required>
+                                <option value="" disabled selected>Selecione...</option>
+                                {% for p in plataformas %}
+                                <option value="{{ p.nome }}">{{ p.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="ano" class="form-label">Ano de lançamento</label>
+                            <input type="number" class="form-control" id="ano" name="ano"
+                                   placeholder="Ex: 2022" min="1970" max="2030" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="nota" class="form-label">Sua nota (1–10)</label>
+                            <input type="number" class="form-control" id="nota" name="nota"
+                                   placeholder="Ex: 9" min="1" max="10" required>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 mt-2">
+                        <button type="submit" class="btn btn-game">💾 Salvar</button>
+                        <a href="{{ url_for('listar_jogos') }}" class="btn btn-outline-secondary">✖ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
