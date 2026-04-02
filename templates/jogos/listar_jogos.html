@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Jogos — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="page-title mb-0">🎮 Coleção de Jogos</h2>
+    <a href="{{ url_for('inserir_jogo') }}" class="btn btn-game">+ Novo Jogo</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-game">
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Gênero</th>
+                <th>Plataforma</th>
+                <th>Ano</th>
+                <th class="text-center">Nota</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for j in jogos %}
+            <tr>
+                <td>{{ j.id }}</td>
+                <td class="fw-semibold">{{ j.titulo }}</td>
+                <td><span class="badge badge-genero">{{ j.genero }}</span></td>
+                <td>{{ j.plataforma }}</td>
+                <td>{{ j.ano }}</td>
+                <td class="text-center">
+                    <span class="nota-badge nota-{{ j.nota }}">⭐ {{ j.nota }}/10</span>
+                </td>
+                <td class="text-center">
+                    <a href="{{ url_for('editar_jogo', jid=j.id) }}" class="btn btn-sm btn-outline-warning">✏️ Editar</a>
+                    <form action="{{ url_for('excluir_jogo', jid=j.id) }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger btn-excluir">🗑️ Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<p class="text-muted small">Total: {{ jogos|length }} jogo(s) na coleção.</p>
+{% endblock %}
