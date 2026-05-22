@@ -76,3 +76,16 @@ Este projeto foi desenvolvido para fins acadêmicos, utilizando listas Python co
 ## 📄 Licença
 
 Projeto de uso educacional.
+
+#select* .funcoes
+if
+	nome = request.form.get('nome', '').strip()
+	status = request.form.get('status', 'Ativo')
+	descricao = request.for.get('descricao', '').strip()
+	gerenciar-funcoes = 1 if request.form.get('gerenciar_funcoes') else 0
+	gerenciar_usuarios = 1 if request.form.get('gerenciar_usuarios') else 0
+	gerenciar_tarefas = 1 if request.form.get('gerenciar_tarefas') else 0
+
+	if not nome:
+		flash('O campo <b>NOME</b> é obrigatorio', 'danger')
+		return redirect(url_for('funcoes_cadastrar')) 
