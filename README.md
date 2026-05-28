@@ -89,3 +89,33 @@ if
 	if not nome:
 		flash('O campo <b>NOME</b> é obrigatorio', 'danger')
 		return redirect(url_for('funcoes_cadastrar')) 
+
+
+		try:
+	sql = '''INSERT INTO funcoes (nome, status, descricao, gerenciar_funcoes, gerenciar_usuarios,
+					gerenciar_cruddotrabalho) 
+		VALUES (%s, %s, %s, %s, %s, %s);
+	'''
+	dados = (nome, status, descricao, gerenciar_funcoes, gerenciar_usuarios, gerenciar_cruddotrabalho)
+	execute_query(sql, dados)
+	flash('A função <b> {} </b> inserida com sucesso!', 'sucess')
+	redirect(url_for('funcoes_cadastrar'))
+except Exceotion as e:
+	flash(f'Erro ao Salvar:{e}', 'danger')
+	return redirect(url_for('funcoes_cadastrar'))
+
+
+@app.route('usuarios/listar')
+def usuarios_listar():
+	sql = '''
+		SELECT
+			id_usuario
+			u.nome AS nome,
+			email,
+			f.nome AS funcao,
+			u.status
+			FROM usuarios AS u
+			INNER JOIN funcoes ON u.funcao_id = f.id_funcao
+			ORDER BY id_usuarios DESC;
+		'''
+	       
