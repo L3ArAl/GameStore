@@ -86,7 +86,7 @@ if
 	gerenciar_usuarios = 1 if request.form.get('gerenciar_usuarios') else 0
 	gerenciar_tarefas = 1 if request.form.get('gerenciar_tarefas') else 0
 
-	if not nome:
+ 	if not nome:
 		flash('O campo <b>NOME</b> é obrigatorio', 'danger')
 		return redirect(url_for('funcoes_cadastrar')) 
 
@@ -100,22 +100,23 @@ if
 	execute_query(sql, dados)
 	flash('A função <b> {} </b> inserida com sucesso!', 'sucess')
 	redirect(url_for('funcoes_cadastrar'))
-except Exceotion as e:
+	except Exceotion as e:
 	flash(f'Erro ao Salvar:{e}', 'danger')
 	return redirect(url_for('funcoes_cadastrar'))
 
+	
+	@app.route('usuarios/listar')
 
-@app.route('usuarios/listar')
-def usuarios_listar():
-	sql = '''
-		SELECT
-			id_usuario
-			u.nome AS nome,
-			email,
-			f.nome AS funcao,
-			u.status
-			FROM usuarios AS u
-			INNER JOIN funcoes ON u.funcao_id = f.id_funcao
-			ORDER BY id_usuarios DESC;
-		'''
-	       
+	def usuarios_listar():
+		sql = '''
+			SELECT
+				id_usuario
+				u.nome AS nome,
+				email,
+				f.nome AS funcao,
+				u.status
+				FROM usuarios AS u
+				INNER JOIN funcoes ON u.funcao_id = f.id_funcao
+				ORDER BY id_usuarios DESC;
+			'''
+		       
