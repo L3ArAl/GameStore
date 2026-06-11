@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block titulo %}funcoes — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="page-title mb-0">🖥️ Funções</h2>
+    <a href="{{ url_for('inserir_funcao') }}" class="btn btn-game">+ Nova Função</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-game">
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Descrição</th>
+                <th>Permissões</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in funcoes %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td class="fw-semibold">{{ p.nome }}</td>
+                <td>{{ p.status }}</td>
+                <td>{{ p.descricao }}</td>
+                <td>{% if p.gerenciar_usuarios %}
+                        <span class="badge bg-primary">Usuários</span>
+                    {% endif %}
+
+                    {% if p.gerenciar_funcoes %}
+                        <span class="badge bg-secondary">Funções</span>
+                    {% endif %}
+
+                    {% if p.gerenciar_jogos %}
+                        <span class="badge bg-success">Jogos</span>
+                    {% endif %}
+
+                    {% if p.gerenciar_plataformas %}
+                        <span class="badge bg-info text-dark">Plataformas</span>
+                    {% endif %}
+                </td>
+
+<td class="text-center">
+    <a href="{{ url_for('editar_funcao', fid=p.id) }}" class="btn btn-sm btn-outline-warning">✏️ Editar</a>
+                    <form action="{{ url_for('excluir_funcao', fid=p.id) }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger btn-excluir">🗑️ Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<p class="text-muted small">Total: {{ funcoes|length }} função(ões) cadastrada(s).</p>
+{% endblock %}
