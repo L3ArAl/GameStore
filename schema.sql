@@ -37,9 +37,14 @@ CREATE TABLE IF NOT EXISTS plataformas (
 -- ─────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS funcoes (
     id_funcao BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    nome VARCHAR(100) NOT NULL UNIQUE,
     status VARCHAR(50) DEFAULT 'Ativo',
     descricao TEXT,
+
+    gerenciar_usuarios TINYINT(1) DEFAULT 0,
+    gerenciar_funcoes TINYINT(1) DEFAULT 0,
+    gerenciar_jogos TINYINT(1) DEFAULT 0,
+    gerenciar_plataformas TINYINT(1) DEFAULT 0,
 
     criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
     alterado_em DATETIME DEFAULT CURRENT_TIMESTAMP
