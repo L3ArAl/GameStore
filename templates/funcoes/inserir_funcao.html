@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Nova Função — GameStore{% endblock %}
+
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+        <div class="card">
+            <div class="card-header-game py-3 px-4">
+                <h5 class="mb-0 fw-bold">⚙️ Cadastrar Nova Função</h5>
+            </div>
+
+            <div class="card-body p-4">
+                <form action="{{ url_for('inserir_funcao') }}" method="post">
+
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome da função</label>
+                        <input type="text" class="form-control" id="nome" name="nome"
+                               placeholder="Ex: Administrador" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" name="descricao"
+                                  rows="3" placeholder="Ex: Acesso total ao sistema"></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Permissões de Acesso do Sistema</label>
+
+                        <div class="border rounded p-3">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="status" name="status" value="Ativo" checked>
+                                <label class="form-check-label fw-bold" for="status">Função Ativa</label>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="gerenciar_usuarios" name="gerenciar_usuarios">
+                                <label class="form-check-label" for="gerenciar_usuarios">
+                                    Pode gerenciar <strong>Usuários</strong>
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="gerenciar_funcoes" name="gerenciar_funcoes">
+                                <label class="form-check-label" for="gerenciar_funcoes">
+                                    Pode gerenciar <strong>Funções</strong>
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="gerenciar_jogos" name="gerenciar_jogos">
+                                <label class="form-check-label" for="gerenciar_jogos">
+                                    Pode gerenciar <strong>Jogos</strong>
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="gerenciar_plataformas" name="gerenciar_plataformas">
+                                <label class="form-check-label" for="gerenciar_plataformas">
+                                    Pode gerenciar <strong>Plataformas</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-game">💾 Salvar</button>
+                        <a href="{{ url_for('listar_funcoes') }}" class="btn btn-outline-secondary">✖ Cancelar</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
