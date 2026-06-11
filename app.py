@@ -392,31 +392,51 @@ def listar_funcoes():
         funcoes=funcoes
     )
 
-@app.route('/funcoes/inserir', methods=['GET','POST'])
+@app.route('/funcoes/inserir', methods=['GET', 'POST'])
 @login_obrigatorio
 def inserir_funcao():
 
     if request.method == 'POST':
 
-        nome = request.form.get('nome')
-        status = request.form.get('status')
-        descricao = request.form.get('descricao')
+        nome = request.form.get('nome', '').strip()
+        descricao = request.form.get('descricao', '').strip()
+
+        status = 'Ativo' if request.form.get('status') else 'Inativo'
+
+        gerenciar_usuarios = 1 if request.form.get('gerenciar_usuarios') else 0
+        gerenciar_funcoes = 1 if request.form.get('gerenciar_funcoes') else 0
+        gerenciar_jogos = 1 if request.form.get('gerenciar_jogos') else 0
+        gerenciar_plataformas = 1 if request.form.get('gerenciar_plataformas') else 0
 
         execute_query(
             '''
             INSERT INTO funcoes
-            (nome,status,descricao)
-            VALUES (%s,%s,%s)
+            (
+                nome,
+                status,
+                descricao,
+                gerenciar_usuarios,
+                gerenciar_funcoes,
+                gerenciar_jogos,
+                gerenciar_plataformas
+            )
+            VALUES (%s,%s,%s,%s,%s,%s,%s)
             ''',
-            (nome,status,descricao)
+            (
+                nome,
+                status,
+                descricao,
+                gerenciar_usuarios,
+                gerenciar_funcoes,
+                gerenciar_jogos,
+                gerenciar_plataformas
+            )
         )
 
-        flash('Função cadastrada com sucesso.')
+        flash('Função cadastrada com sucesso.', 'success')
         return redirect(url_for('listar_funcoes'))
 
-    return render_template(
-        'funcoes/inserir_funcao.html'
-    )
+    return render_template('funcoes/inserir_funcao.html')
 
 @app.route('/funcoes/editar/<int:fid>', methods=['GET', 'POST'])
 @login_obrigatorio
@@ -435,19 +455,38 @@ def editar_funcao(fid):
 
     if request.method == 'POST':
 
-        nome = request.form.get('nome')
-        status = request.form.get('status')
-        descricao = request.form.get('descricao')
+        nome = request.form.get('nome', '').strip()
+        descricao = request.form.get('descricao', '').strip()
+
+        status = 'Ativo' if request.form.get('status') else 'Inativo'
+
+        gerenciar_usuarios = 1 if request.form.get('gerenciar_usuarios') else 0
+        gerenciar_funcoes = 1 if request.form.get('gerenciar_funcoes') else 0
+        gerenciar_jogos = 1 if request.form.get('gerenciar_jogos') else 0
+        gerenciar_plataformas = 1 if request.form.get('gerenciar_plataformas') else 0
 
         execute_query(
             '''
             UPDATE funcoes
             SET nome=%s,
                 status=%s,
-                descricao=%s
+                descricao=%s,
+                gerenciar_usuarios=%s,
+                gerenciar_funcoes=%s,
+                gerenciar_jogos=%s,
+                gerenciar_plataformas=%s
             WHERE id_funcao=%s
             ''',
-            (nome, status, descricao, fid)
+            (
+                nome,
+                status,
+                descricao,
+                gerenciar_usuarios,
+                gerenciar_funcoes,
+                gerenciar_jogos,
+                gerenciar_plataformas,
+                fid
+            )
         )
 
         flash('Função atualizada.', 'success')
